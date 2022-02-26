@@ -18,6 +18,11 @@ export default function Getfriends() {
         getFriends();
     },[]);
     //2. Function defination
+
+    let handleEdit =()=>{
+        console.log("edit operation");
+    }
+
     let getFriends = (pageno=1)=>{// e = event //ES6 Fat arrow functions // default argument
         console.log(config.dev_url);
         console.log('good morning')
@@ -61,11 +66,11 @@ export default function Getfriends() {
     //3. REturn statement JSX
     return (
         <Layouts>
-            <h1>GetFriends {param.stu_id} {param.id} </h1>
+            <h1>GetFriends {param.fri_id} {param.id} </h1>
             <h1 className="d-flex justify-content-center">Read Operation with Pagination</h1>
-            <div className="d-flex justify-content-center">
+            {/* <div className="d-flex justify-content-center">
                 <Button onClick={(e)=>{ getFriends() }}>Get My Friends</Button>
-            </div>
+            </div> */}
         
             <br />
             <br />
@@ -83,22 +88,22 @@ export default function Getfriends() {
                     </thead>
                     <tbody>
                         {
-                        friends.data.map(function(currentValue, index, arr){
-                            console.log(arr[index].id);
-                            console.log(arr[index].attributes.Name);
-                            return (
-                                <tr key={index}>
-                                <td>{arr[index].id}</td>
-                                <td>{arr[index].attributes.Name}</td>
-                                <td>{arr[index].attributes.Class}</td>
-                                <td>
-                                    <Button variant="success" size="sm">View</Button>&nbsp;
-                                    <NavLink to={`/edit_friends/${arr[index].id}`} variant="primary" size="sm">Edit</NavLink>&nbsp;
-                                    <Button variant="danger" size="sm">Delete</Button>
-                                </td>
-                                </tr>
-                            )//JSX
-                        })
+                            friends.data.map(function(currentValue, index, arr){
+                                //console.log(arr[index].id);
+                                //console.log(arr[index].attributes.Name);
+                                return (
+                                    <tr key={index}>
+                                    <td>{arr[index].id}</td>
+                                    <td>{arr[index].attributes.Name}</td>
+                                    <td>{arr[index].attributes.Class}</td>
+                                    <td>
+                                        <Button variant="success" size="sm">View</Button>&nbsp;
+                                        <NavLink to={`/editfriends/${arr[index].id}`} onChange={() => {handleEdit()}} variant="primary" size="sm">Edit</NavLink>&nbsp;
+                                        <Button variant="danger" size="sm">Delete</Button>
+                                    </td>
+                                    </tr>
+                                )//JSX
+                            })
                         }
                         
 
