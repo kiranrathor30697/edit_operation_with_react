@@ -2,6 +2,10 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <div>Footer</div>
+    <>
+      <hr/>
+      <h1 className="text-center mt-4">Footer</h1>
+    </>
+    
   )
 }

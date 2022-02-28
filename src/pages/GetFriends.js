@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Table } from 'react-bootstrap';
+import { Button, Modal, Table } from 'react-bootstrap';
 import { NavLink, useParams } from 'react-router-dom'
 import Layouts from '../Components/Layouts'
 
@@ -11,6 +11,11 @@ export default function Getfriends() {
         data:[]
       });//Empty Array
 
+      const [show, setShow] = useState(false);
+
+      const handleClose = () => setShow(false);
+      const handleShow = () => setShow(true);
+
     let param = useParams()
 
     useEffect(()=>{
@@ -18,9 +23,14 @@ export default function Getfriends() {
         getFriends();
     },[]);
     //2. Function defination
+    let su
 
     let handleEdit =()=>{
         console.log("edit operation");
+    }
+
+    let submitFriend=()=>{
+        
     }
 
     let getFriends = (pageno=1)=>{// e = event //ES6 Fat arrow functions // default argument
@@ -66,7 +76,32 @@ export default function Getfriends() {
     //3. REturn statement JSX
     return (
         <Layouts>
-            <h1>GetFriends {param.fri_id} {param.id} </h1>
+            <>
+                <Modal size="lg" show={show} onHide={handleClose} animation={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form onSubmit={(e)=>{submitFriend(e);}}>
+                        <div className="mb-3">
+                            <label htmlFor="name" className="form-label">Edir Friend</label>
+                            <input type="text" name="Name" className="form-control" id="name" />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Submit</button>
+                    </form>
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                    Close
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                    Save Changes
+                    </Button>
+                </Modal.Footer>
+                </Modal>
+            </>
+                    <h1> {param.fri_id} {param.id} </h1>
             <h1 className="d-flex justify-content-center">Read Operation with Pagination</h1>
             {/* <div className="d-flex justify-content-center">
                 <Button onClick={(e)=>{ getFriends() }}>Get My Friends</Button>
@@ -99,6 +134,7 @@ export default function Getfriends() {
                                     <td>
                                         <Button variant="success" size="sm">View</Button>&nbsp;
                                         <NavLink to={`/editfriends/${arr[index].id}`} onChange={() => {handleEdit()}} variant="primary" size="sm">Edit</NavLink>&nbsp;
+                                        <Button variant="info" onClick={handleShow}>Edit with Model</Button>&nbsp;
                                         <Button variant="danger" size="sm">Delete</Button>
                                     </td>
                                     </tr>

@@ -124,8 +124,9 @@ useEffect(()=>{
 
         setHide('');
 
-        swal("Good job!", "Friend Edit Succefully", "success");
-        window.location.reload();
+        let s = swal("Good job!", "Friend Edit Succefully", "success");
+        console.log('swal',s);
+        //window.location.reload();
 
       //array.map(function(currentValue, index, arr));
       //PaginationItem()
@@ -170,7 +171,7 @@ useEffect(()=>{
                 <div className="row">
                   <form onSubmit={(e)=>{submitFriend(e)}}>
                       <label className="mb-3">Friend Name:
-                        <input type="text" name="Name" value={friend.data.attributes.Name} onChange={(e) => {handleChange1(e)}}/>
+                        <input type="text" autoFocus name="Name" value={friend.data.attributes.Name} onChange={(e) => {handleChange1(e)}}/>
                       </label>
                       <br />
                       {/* <label className="mb-3">Class:
