@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal, Table } from 'react-bootstrap';
-import { NavLink, useParams } from 'react-router-dom'
+import { NavLink, useParams,useNavigate } from 'react-router-dom'
 import Layouts from '../Components/Layouts'
 
 const config = require('../config.json');
@@ -16,14 +16,19 @@ export default function Getfriends() {
       const handleClose = () => setShow(false);
       const handleShow = () => setShow(true);
 
-    let param = useParams()
+    let param = useParams();
+    const aB = useNavigate()
 
     useEffect(()=>{
-        console.log("Page loadded succfully");
-        getFriends();
+        console.log(aB)
+        if(!localStorage.getItem('jwt')){
+            aB('/login');
+          }else{
+            getFriends();
+          }
     },[]);
     //2. Function defination
-    let su
+    
 
     let handleEdit =()=>{
         console.log("edit operation");
